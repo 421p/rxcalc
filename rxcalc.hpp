@@ -65,12 +65,13 @@ public:
     
 double rxcalc::calculate(const char* ex, bool debug){    
         this->expression = ex;
+        expression.erase(remove_if(expression.begin(), expression.end(), isspace), expression.end()); //erase spaces
         try{
             while(std::regex_search(expression, regexResult, skobkiPattern)){
                 expression = std::regex_replace(expression, skobkiPattern, std::to_string(simpleParse(regexResult.str(1))), std::regex_constants::format_first_only);
             }
             if(debug){
-                std::cerr<<"We've done with skobka's."<<std::endl
+                std::cerr<<"Skobka's step."<<std::endl
                 <<expression<<std::endl;
             }
             
@@ -84,7 +85,7 @@ double rxcalc::calculate(const char* ex, bool debug){
             expression = std::regex_replace(expression, firstPriorityPattern, std::to_string(simpleParse(regexResult.str())), std::regex_constants::format_first_only);
         }
             if(debug){
-                std::cerr<<"We've done with * and /. "<<std::endl
+                std::cerr<<"* and / step."<<std::endl
                 <<expression<<std::endl;
             }
                 
@@ -98,7 +99,7 @@ double rxcalc::calculate(const char* ex, bool debug){
                 expression = std::regex_replace(expression, secondPriorityPattern, std::to_string(simpleParse(regexResult.str())), std::regex_constants::format_first_only);
             }
             if(debug){
-                std::cerr<<"We've done with + and - "<<std::endl
+                std::cerr<<"+ and - step."<<std::endl
                 <<expression<<std::endl;                
             }
         } catch (std::exception& e) {
@@ -111,12 +112,13 @@ double rxcalc::calculate(const char* ex, bool debug){
   
 double rxcalc::calculate(std::string ex, bool debug){    
         this->expression = ex;
+        expression.erase(remove_if(expression.begin(), expression.end(), isspace), expression.end()); //erase spaces
         try{
             while(std::regex_search(expression, regexResult, skobkiPattern)){
                 expression = std::regex_replace(expression, skobkiPattern, std::to_string(simpleParse(regexResult.str(1))), std::regex_constants::format_first_only);
             }
             if(debug){
-                std::cerr<<"We've done with skobka's."<<std::endl
+                std::cerr<<"Skobka's step."<<std::endl
                 <<expression<<std::endl;
             }
             
@@ -130,7 +132,7 @@ double rxcalc::calculate(std::string ex, bool debug){
             expression = std::regex_replace(expression, firstPriorityPattern, std::to_string(simpleParse(regexResult.str())), std::regex_constants::format_first_only);
         }
             if(debug){
-                std::cerr<<"We've done with * and /. "<<std::endl
+                std::cerr<<"* and / step. "<<std::endl
                 <<expression<<std::endl;
             }
                 
@@ -144,7 +146,7 @@ double rxcalc::calculate(std::string ex, bool debug){
                 expression = std::regex_replace(expression, secondPriorityPattern, std::to_string(simpleParse(regexResult.str())), std::regex_constants::format_first_only);
             }
             if(debug){
-                std::cerr<<"We've done with + and - "<<std::endl
+                std::cerr<<"+ and - step."<<std::endl
                 <<expression<<std::endl;                
             }
         } catch (std::exception& e) {
@@ -155,13 +157,14 @@ double rxcalc::calculate(std::string ex, bool debug){
         return stod(expression);
     }
   
-double rxcalc::calculate(bool debug){        
+double rxcalc::calculate(bool debug){ 
+        expression.erase(remove_if(expression.begin(), expression.end(), isspace), expression.end()); //erase spaces
         try{
             while(std::regex_search(expression, regexResult, skobkiPattern)){
                 expression = std::regex_replace(expression, skobkiPattern, std::to_string(simpleParse(regexResult.str(1))), std::regex_constants::format_first_only);
             }
             if(debug){
-                std::cerr<<"We've done with skobka's."<<std::endl
+                std::cerr<<"skobka's step."<<std::endl
                 <<expression<<std::endl;
             }
             
@@ -175,7 +178,7 @@ double rxcalc::calculate(bool debug){
             expression = std::regex_replace(expression, firstPriorityPattern, std::to_string(simpleParse(regexResult.str())), std::regex_constants::format_first_only);
         }
             if(debug){
-                std::cerr<<"We've done with * and /. "<<std::endl
+                std::cerr<<"* and / step."<<std::endl
                 <<expression<<std::endl;
             }
                 
@@ -189,7 +192,7 @@ double rxcalc::calculate(bool debug){
                 expression = std::regex_replace(expression, secondPriorityPattern, std::to_string(simpleParse(regexResult.str())), std::regex_constants::format_first_only);
             }
             if(debug){
-                std::cerr<<"We've done with + and - "<<std::endl
+                std::cerr<<"+ and - step."<<std::endl
                 <<expression<<std::endl;                
             }
         } catch (std::exception& e) {
